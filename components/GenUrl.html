@@ -1,0 +1,53 @@
+<h1> Urls: </h1>
+<ul>
+{#each out as o}
+<li> {o} </li>
+{/each}
+</ul>
+<ul>
+  {#each tokens.flat() as token}
+    <input type="text" value="{token}">
+  {/each}
+</ul>
+
+<button on:click="add()"> add </button>
+
+
+
+<!-- Default data -->
+<script>
+  export default {
+    data () {
+      return {
+        count: 0,
+        tokens: tokens,
+        out: out
+      };
+    }
+  };
+
+let tokens = [
+  ['sit1'],
+  ['tienda-online'],
+  ['catalogo', 'ficha', 'tarifas', 'cobertura'],
+  ['aaa', 'bbb']
+]
+
+const out = tokens.reduce( 
+  (acc, current) => {
+    console.log('prev', acc);
+    console.log('curr', current);
+
+    return acc.map( _acc => current.map( curr => `${_acc}/${curr}`)).flat();
+  }
+)
+
+console.log( out )
+</script>
+
+<!-- Include styles -->
+<style>
+  p, button {
+    font-family: Lato;
+  }
+</style>
